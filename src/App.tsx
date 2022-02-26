@@ -1,3 +1,4 @@
+import {Box} from '@mui/material';
 import React from 'react';
 import './App.css';
 import CommentsList from './components/comments/CommentsList';
@@ -5,10 +6,14 @@ import UsersList from "./components/users/UsersList";
 
 function App() {
     return (
-        <div>
-            <CommentsList />
-            <UsersList />
-        </div>
+        <>
+            <Box sx={{ m: "2rem" }}>
+                <CommentsList />
+            </Box>
+            <Box sx={{ m: "2rem" }}>
+                <UsersList />
+            </Box>
+        </>
     );
 }
 
