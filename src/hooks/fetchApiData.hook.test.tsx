@@ -1,5 +1,4 @@
 import React from 'react';
-import {fireEvent, render, screen} from '@testing-library/react';
 import {useFetchApiData} from "./fetchApiData.hook";
 import { renderHook } from '@testing-library/react-hooks'
 
@@ -12,14 +11,14 @@ describe('FetchApiData hook', () => {
             headers: {
                 get: () => ({'x-total-count': 0})
             },
-            json: async () => ({success: true}),
+            json: async () => ([1, 2]),
         })
 
         const {result, waitForNextUpdate} = renderHook(() => useFetchApiData('test.com', 1))
         
         await waitForNextUpdate()
 
-        expect(result.current.data).toEqual({success: true})
+        expect(result.current.data).toEqual([1, 2])
     })
     
     it("Returns error code", async () => {
