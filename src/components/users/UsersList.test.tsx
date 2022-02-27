@@ -2,7 +2,6 @@ import React from 'react';
 import {fireEvent, render, screen} from '@testing-library/react';
 import UsersList from './UsersList';
 import * as useUsersApi from "../../hooks/useUsersApi.hook";
-import CommentsList from "../comments/CommentsList";
 
 describe('UsersList component', () => {
     it('Renders users component', () => {
@@ -85,8 +84,8 @@ describe('UsersList component', () => {
             count: 0,
         }));
 
-        render(<CommentsList/>);
-        const message = screen.getByText(/no data/i);
+        render(<UsersList/>);
+        const message = screen.getByText(/No data/i);
         expect(message).toBeInTheDocument();
 
         spy.mockRestore()
