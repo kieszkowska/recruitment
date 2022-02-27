@@ -1,22 +1,33 @@
 import React, {useState} from 'react';
-import {useCommentsApiHook} from "./useCommentsApi.hook";
+import {useCommentsApiHook} from "../hooks/useCommentsApi.hook";
 import Comment from "./Comment";
-import {Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {
+    LinearProgress,
+    Pagination,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow
+} from "@mui/material";
+import {PER_PAGE_COUNT} from "../utils/consts";
 
 const CommentsList = () => {
     const [page, setPage] = useState(1)
     const { data, error, count } = useCommentsApiHook(page);
-    const pageCount = count / 10
+    const pageCount = count / PER_PAGE_COUNT
     
     const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value)
     }
     
     if (error) {
-        return <div>Error</div>
+        return <Paper sx={{ p: "20px" }}>Error {error}</Paper>
     }
     
-    if (data) {
+    if (data?.length) {
         return <div>
             <TableContainer component={Paper}>
                 <Table>
@@ -43,7 +54,7 @@ const CommentsList = () => {
         </div>
     }
     
-    return <div>Loading</div>;
+    return <Paper><LinearProgress /></Paper>;
 }
 
 export default CommentsList;

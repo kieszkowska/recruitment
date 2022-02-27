@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
-import {useUsersApiHook} from "./useUsersApi.hook";
+import {useUsersApiHook} from "../hooks/useUsersApi.hook";
 import {Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import User from './User';
+import { PER_PAGE_COUNT } from '../utils/consts';
 
 const UsersList = () => {
     const [page, setPage] = useState(1)
     const { data, error, count } = useUsersApiHook(page);
-    const pageCount = count / 10
+    const pageCount = count / PER_PAGE_COUNT
 
     const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value)

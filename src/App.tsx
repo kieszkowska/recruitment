@@ -1,6 +1,5 @@
 import {Box} from '@mui/material';
 import React from 'react';
-import './App.css';
 import CommentsList from './components/comments/CommentsList';
 import UsersList from "./components/users/UsersList";
 
