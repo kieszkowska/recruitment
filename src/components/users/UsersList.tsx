@@ -28,7 +28,12 @@ const UsersList = () => {
         return <Paper sx={{ p: "20px" }}>Error {error}</Paper>
     }
 
-    if (data?.length) {
+
+    if (!data) {
+        return <Paper><LinearProgress /></Paper>;
+    }
+
+    if (data && data.length) {
         return <div>
             <Typography variant={"h4"}>Users</Typography>
             <TableContainer component={Paper}>
@@ -59,7 +64,7 @@ const UsersList = () => {
         </div>
     }
 
-    return <Paper><LinearProgress /></Paper>;
+    return <Paper sx={{ p: "20px" }}>No data</Paper>;
 }
 
 export default UsersList

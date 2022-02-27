@@ -43,19 +43,26 @@ describe('CommentsList component', () => {
 
     it('Render loader when no data', () => {
         const spy = jest.spyOn(useCommentsApi, 'useCommentsApiHook').mockImplementation(() => ({
-            data: [],
+            data: undefined,
             count: 0,
         }));
-        jest.mock('../../hooks/useCommentsApi.hook', () => ({
-            useCommentsApiHook: () => ({
-                data: [],
-                count: 0
-            })
-        }))
 
         render(<CommentsList/>);
         const loader = screen.getByRole(/progress/i);
         expect(loader).toBeInTheDocument();
+
+        spy.mockRestore()
+    });
+
+    it('Render message when empty data', () => {
+        const spy = jest.spyOn(useCommentsApi, 'useCommentsApiHook').mockImplementation(() => ({
+            data: [],
+            count: 0,
+        }));
+
+        render(<CommentsList/>);
+        const message = screen.getByText(/no data/i);
+        expect(message).toBeInTheDocument();
 
         spy.mockRestore()
     });

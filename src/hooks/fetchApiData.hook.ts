@@ -16,7 +16,7 @@ export const useFetchApiData = <T>(url: string, page: number): Data<Array<T>> =>
                 setCount(Number(response.headers.get("x-total-count")))
                 return response.json();
             })
-            .then(response => setData(response));
+            .then(response => setData(response?.length ? response : undefined));
     }, [page]);
 
     return {

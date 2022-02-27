@@ -26,8 +26,12 @@ const CommentsList = () => {
     if (error) {
         return <Paper sx={{ p: "20px" }}>Error {error}</Paper>
     }
+
+    if (!data) {
+        return <Paper><LinearProgress /></Paper>;
+    }
     
-    if (data?.length) {
+    if (data && data.length) {
         return <div>
             <Typography variant={"h4"}>Comments</Typography>
             <TableContainer component={Paper}>
@@ -54,8 +58,8 @@ const CommentsList = () => {
             </TableContainer>
         </div>
     }
-    
-    return <Paper><LinearProgress /></Paper>;
+
+    return <Paper sx={{ p: "20px" }}>No data</Paper>;
 }
 
 export default CommentsList;

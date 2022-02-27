@@ -2,6 +2,7 @@ import React from 'react';
 import {fireEvent, render, screen} from '@testing-library/react';
 import UsersList from './UsersList';
 import * as useUsersApi from "../../hooks/useUsersApi.hook";
+import CommentsList from "../comments/CommentsList";
 
 describe('UsersList component', () => {
     it('Renders users component', () => {
@@ -67,15 +68,9 @@ describe('UsersList component', () => {
 
     it('Render loader when no data', () => {
         const spy = jest.spyOn(useUsersApi, 'useUsersApiHook').mockImplementation(() => ({
-            data: [],
+            data: undefined,
             count: 0,
         }));
-        jest.mock('../../hooks/useCommentsApi.hook', () => ({
-            useCommentsApiHook: () => ({
-                data: [],
-                count: 0
-            })
-        }))
 
         render(<UsersList/>);
         const loader = screen.getByRole(/progress/i);
@@ -83,6 +78,20 @@ describe('UsersList component', () => {
 
         spy.mockRestore()
     });
+
+    it('Render message when empty data', () => {
+        const spy = jest.spyOn(useUsersApi, 'useUsersApiHook').mockImplementation(() => ({
+            data: [],
+            count: 0,
+        }));
+
+        render(<CommentsList/>);
+        const message = screen.getByText(/no data/i);
+        expect(message).toBeInTheDocument();
+
+        spy.mockRestore()
+    });
+
 
     it('Render error message on error', async () => {
         const spy = jest.spyOn(useUsersApi, 'useUsersApiHook').mockImplementation(() => ({
