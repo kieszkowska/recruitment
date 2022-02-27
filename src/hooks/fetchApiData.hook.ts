@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Data} from "../types/data";
+import {Data} from "../components/types/data";
 
 export const useFetchApiData = <T>(url: string, page: number): Data<Array<T>> => {
     const [data, setData] = useState<T[]>([]);

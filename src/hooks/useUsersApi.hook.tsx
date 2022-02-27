@@ -10,7 +10,7 @@ export interface UserData {
         suite: string,
         city: string,
         zipcode: string,
-        geo: {
+        geo?: {
             lat: string,
             lon: string,
         },

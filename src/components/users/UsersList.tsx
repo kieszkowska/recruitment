@@ -1,8 +1,19 @@
 import React, {useState} from 'react';
-import {useUsersApiHook} from "../hooks/useUsersApi.hook";
-import {Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {useUsersApiHook} from "../../hooks/useUsersApi.hook";
+import {
+    LinearProgress,
+    Pagination,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Typography
+} from "@mui/material";
 import User from './User';
-import { PER_PAGE_COUNT } from '../utils/consts';
+import { PER_PAGE_COUNT } from '../../utils/consts';
 
 const UsersList = () => {
     const [page, setPage] = useState(1)
@@ -14,11 +25,12 @@ const UsersList = () => {
     }
 
     if (error) {
-        return <div>Error</div>
+        return <Paper sx={{ p: "20px" }}>Error {error}</Paper>
     }
 
-    if (data) {
+    if (data?.length) {
         return <div>
+            <Typography variant={"h4"}>Users</Typography>
             <TableContainer component={Paper}>
                 <Table>
                     <TableHead>
@@ -47,7 +59,7 @@ const UsersList = () => {
         </div>
     }
 
-    return <div>Loading</div>;
+    return <Paper><LinearProgress /></Paper>;
 }
 
 export default UsersList

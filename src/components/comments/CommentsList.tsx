@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useCommentsApiHook} from "../hooks/useCommentsApi.hook";
+import {useCommentsApiHook} from "../../hooks/useCommentsApi.hook";
 import Comment from "./Comment";
 import {
     LinearProgress,
@@ -10,9 +10,9 @@ import {
     TableCell,
     TableContainer,
     TableHead,
-    TableRow
+    TableRow, Typography
 } from "@mui/material";
-import {PER_PAGE_COUNT} from "../utils/consts";
+import {PER_PAGE_COUNT} from "../../utils/consts";
 
 const CommentsList = () => {
     const [page, setPage] = useState(1)
@@ -29,6 +29,7 @@ const CommentsList = () => {
     
     if (data?.length) {
         return <div>
+            <Typography variant={"h4"}>Comments</Typography>
             <TableContainer component={Paper}>
                 <Table>
                     <TableHead>
@@ -42,7 +43,7 @@ const CommentsList = () => {
                     </TableHead>
                     <TableBody>
                         { data.map(el => (
-                            <TableRow key={el.id}>
+                            <TableRow key={'comment' + el.id}>
                                 <Comment data={el}/>
                             </TableRow>
                         ))}

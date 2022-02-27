@@ -1,6 +1,6 @@
 import { TableCell } from '@mui/material';
 import React from 'react';
-import {CommentData} from "../hooks/useCommentsApi.hook";
+import {CommentData} from "../../hooks/useCommentsApi.hook";
 
 interface Props {
     data: CommentData
